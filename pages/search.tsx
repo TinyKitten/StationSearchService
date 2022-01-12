@@ -18,11 +18,16 @@ export default function Search() {
   const { loading, error, stations } = useStationByName(
     router.query.q as string | undefined
   );
+
   const handleBackClick = () => router.back();
 
   if (loading) {
     return (
       <Container text textAlign="center">
+        <Head>
+          <title>{router.query.q}を検索中 - SSS</title>
+        </Head>
+
         <ContentContainer>
           <Dimmer active>
             <Loader inverted>Loading</Loader>
@@ -35,6 +40,10 @@ export default function Search() {
   if (error) {
     return (
       <Container text textAlign="center">
+        <Head>
+          <title>検索エラー - SSS</title>
+        </Head>
+
         <ContentContainer>
           <Header as="h1">AN ERROR OCCURRED.</Header>
           <Header as="p">なんかエラー起きたくさい。ゆるして</Header>
@@ -50,7 +59,7 @@ export default function Search() {
   return (
     <Container>
       <Head>
-        <title>{router.query.q}で検索中 - SSS</title>
+        <title>{router.query.q}の検索結果 - SSS</title>
       </Head>
 
       <Button onClick={handleBackClick}>戻る</Button>
